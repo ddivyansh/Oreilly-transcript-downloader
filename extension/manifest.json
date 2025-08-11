@@ -1,29 +1,29 @@
 {
-    "manifest_version": 3,
-    "name": "Transcript Extractor",
-    "version": "1.0.0",
-    "description": "Extract transcript content from web pages",
-    "permissions": [
-        "activeTab",
-        "clipboardWrite",
-        "downloads"
-    ],
-    "action": {
-        "default_popup": "popup.html",
-        "default_title": "Extract Transcript"
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "<all_urls>"
-            ],
-            "js": [
-                "transcript-extractor.js"
-            ],
-            "run_at": "document_end"
-        }
-    ],
-    "background": {
-        "service_worker": "background.js"
+  "manifest_version": 3,
+  "name": "Transcript Extractor",
+  "version": "1.0.0",
+  "description": "Extract transcript content from web pages",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "downloads"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Extract Transcript"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "transcript-extractor.js"
+      ],
+      "run_at": "document_end"
     }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

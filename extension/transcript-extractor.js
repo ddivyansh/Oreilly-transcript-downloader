@@ -17,7 +17,7 @@ class TranscriptExtractor {
      */
     extractTranscript() {
         const transcriptBody = document.querySelector(this.transcriptBodySelector);
-        
+
         if (!transcriptBody) {
             console.warn('Transcript body not found on this page');
             return [];
@@ -69,7 +69,7 @@ class TranscriptExtractor {
     async copyToClipboard(includeTimestamps = false, separator = '\n\n') {
         try {
             const entries = this.extractTranscript();
-            
+
             if (entries.length === 0) {
                 console.warn('No transcript content found');
                 return false;
@@ -77,7 +77,7 @@ class TranscriptExtractor {
 
             let textToCopy;
             if (includeTimestamps) {
-                textToCopy = entries.map(entry => 
+                textToCopy = entries.map(entry =>
                     `${entry.timestamp}: ${entry.content}`
                 ).join(separator);
             } else {
@@ -101,7 +101,7 @@ class TranscriptExtractor {
      */
     downloadTranscript(filename = 'transcript.txt', includeTimestamps = false, separator = '\n\n') {
         const entries = this.extractTranscript();
-        
+
         if (entries.length === 0) {
             console.warn('No transcript content found');
             return;
@@ -109,16 +109,16 @@ class TranscriptExtractor {
 
         let content;
         if (includeTimestamps) {
-            content = entries.map(entry => 
+            content = entries.map(entry =>
                 `${entry.timestamp}: ${entry.content}`
             ).join(separator);
         } else {
             content = entries.map(entry => entry.content).join(separator);
         }
 
-        const blob = new Blob([content], { type: 'text/plain' });
+        const blob = new Blob([content], {type: 'text/plain'});
         const url = URL.createObjectURL(blob);
-        
+
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
@@ -126,7 +126,7 @@ class TranscriptExtractor {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
+
         console.log(`Downloaded transcript with ${entries.length} entries`);
     }
 
@@ -137,7 +137,7 @@ class TranscriptExtractor {
     getSummary() {
         const entries = this.extractTranscript();
         const content = this.extractContentAsText();
-        
+
         return {
             totalEntries: entries.length,
             totalCharacters: content.length,
@@ -193,7 +193,7 @@ if (typeof window !== 'undefined') {
     // Make extractor available globally
     window.TranscriptExtractor = TranscriptExtractor;
     window.TranscriptUtils = TranscriptUtils;
-    
+
     console.log('Transcript Extractor loaded!');
     console.log('Available functions:');
     console.log('- TranscriptUtils.quickExtract() - Extract and log transcript');
@@ -205,5 +205,5 @@ if (typeof window !== 'undefined') {
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { TranscriptExtractor, TranscriptUtils };
+    module.exports = {TranscriptExtractor, TranscriptUtils};
 }
